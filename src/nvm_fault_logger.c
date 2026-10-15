@@ -147,6 +147,8 @@ nvm_fault_logger_status_t nvm_fault_logger_init(nvm_fault_logger_t *logger,
     logger->base_address = config->base_address;
     logger->slot_count   = config->slot_count;
     logger->slot_size    = config->slot_size;
+    logger->read_fn      = config->read_fn;
+    logger->write_fn     = config->write_fn;
 
     for (uint32_t slot = 0; slot < logger->slot_count; ++slot)
     {

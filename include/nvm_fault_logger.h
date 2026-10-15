@@ -94,6 +94,8 @@ typedef struct
     uint32_t next_sequence;
     uint32_t newest_sequence;
     uint32_t oldest_sequence;
+    nvm_fault_logger_read_fn read_fn;
+    nvm_fault_logger_write_fn write_fn;
     uint8_t  initialized;
     uint8_t  valid_slots[NVM_FAULT_LOGGER_MAX_SLOTS];
 } nvm_fault_logger_t;
