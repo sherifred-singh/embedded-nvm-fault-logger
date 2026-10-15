@@ -1,0 +1,41 @@
+name: NVM Fault Logger CI & Unit Test Suite
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build-and-test:
+    name: GCC Native Build, Static Analysis & Automated Test Suite
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install Build Tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gcc make cppcheck
+
+      - name: Static Code Analysis (cppcheck)
+        run: |
+          cppcheck --enable=warning,performance,portability \
+            --suppress=missingInclude --suppress=missingIncludeSystem \
+            --error-exitcode=1 \
+            -I include \
+            src/
+
+      - name: Compile and Run Automated Test Suites
+        run: |
+          gcc -std=c99 -Wall -Wextra -Werror -pedantic \
+            -I include \
+            -I tests/unity \
+            src/nvm_fault_logger.c \
+            tests/test_nvm_fault_logger.c \
+            tests/unity/unity.c \
+            -o test_runner
+
+          ./test_runner
