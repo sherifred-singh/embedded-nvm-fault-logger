@@ -41,10 +41,16 @@ int  unity_end(void);
 
 #define TEST_ASSERT_TRUE(condition)             TEST_ASSERT((condition))
 #define TEST_ASSERT_FALSE(condition)            TEST_ASSERT(!(condition))
-#define TEST_ASSERT_EQUAL_UINT(expected, actual) TEST_ASSERT((uint32_t)(expected) == (uint32_t)(actual))
-#define TEST_ASSERT_EQUAL_INT(expected, actual)  TEST_ASSERT((int32_t)(expected) == (int32_t)(actual))
-#define TEST_ASSERT_NOT_NULL(ptr)               TEST_ASSERT((ptr) != NULL)
-#define TEST_ASSERT_NULL(ptr)                   TEST_ASSERT((ptr) == NULL)
+#define TEST_ASSERT_EQUAL_UINT(expected, actual)   TEST_ASSERT((uint32_t)(expected) == (uint32_t)(actual))
+#define TEST_ASSERT_EQUAL_UINT32(expected, actual) TEST_ASSERT((uint32_t)(expected) == (uint32_t)(actual))
+#define TEST_ASSERT_EQUAL_UINT16(expected, actual) TEST_ASSERT((uint16_t)(expected) == (uint16_t)(actual))
+#define TEST_ASSERT_EQUAL_UINT8(expected, actual)  TEST_ASSERT((uint8_t)(expected) == (uint8_t)(actual))
+#define TEST_ASSERT_EQUAL_INT(expected, actual)    TEST_ASSERT((int32_t)(expected) == (int32_t)(actual))
+#define TEST_ASSERT_NOT_NULL(ptr)                 TEST_ASSERT((ptr) != NULL)
+#define TEST_ASSERT_NULL(ptr)                     TEST_ASSERT((ptr) == NULL)
+
+#define UNITY_BEGIN() unity_begin("NVM Fault Logger Unit Tests")
+#define UNITY_END()   unity_end()
 
 #define RUN_TEST(test_func) do { \
     Unity.current_test_failed = 0; \
