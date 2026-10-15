@@ -52,10 +52,15 @@ int  unity_end(void);
 #define UNITY_BEGIN() unity_begin("NVM Fault Logger Unit Tests")
 #define UNITY_END()   unity_end()
 
+extern void setUp(void);
+extern void tearDown(void);
+
 #define RUN_TEST(test_func) do { \
     Unity.current_test_failed = 0; \
     printf("  RUNNING: %s ... ", #test_func); \
+    setUp(); \
     test_func(); \
+    tearDown(); \
     if (!Unity.current_test_failed) { \
         printf("PASS\n"); \
     } \
